@@ -8,11 +8,18 @@ We've created comprehensive guides for different needs:
 
 | Guide | Purpose | Time Needed |
 |-------|---------|-------------|
+| **[STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** | 👉 **Complete beginners** - Every step explained | 10 minutes |
 | **[QUICKSTART.md](QUICKSTART.md)** | Get running quickly | 2-5 minutes |
 | **[HOW_TO_CHECK_OUT.md](HOW_TO_CHECK_OUT.md)** | Test the application | 5-10 minutes |
 | **[DEPLOYMENT.md](DEPLOYMENT.md)** | Deploy to production | 15-30 minutes |
 | **[README.md](README.md)** | Full API documentation | Reference |
 | **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** | Technical details | Reference |
+
+**🆕 Never used command line before?** → [STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)
+
+**Have some experience?** → [QUICKSTART.md](QUICKSTART.md)
+
+**Want to deploy online?** → [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ---
 

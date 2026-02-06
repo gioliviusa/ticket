@@ -6,11 +6,14 @@ A full-stack web application for safely buying and selling event tickets with us
 
 ## 📖 Documentation
 
-**New to TicketSwap?** Start here: **[GETTING_STARTED.md](GETTING_STARTED.md)**
+**🆕 Complete Beginner?** Start here: **[STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** ⭐
 
-| Guide | Purpose |
+This guide tells you **exactly** what to type, where to click, and what to copy/paste - perfect if you've never used the command line before!
+
+| Guide | Best For |
 |-------|---------|
-| **[GETTING_STARTED.md](GETTING_STARTED.md)** | 👉 **Start here** - Overview of all guides |
+| **[STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** | 👉 **Absolute beginners** - Every detail explained |
+| **[GETTING_STARTED.md](GETTING_STARTED.md)** | Overview of all guides |
 | **[QUICKSTART.md](QUICKSTART.md)** | Get running in 2 minutes |
 | **[HOW_TO_CHECK_OUT.md](HOW_TO_CHECK_OUT.md)** | Test the application |
 | **[DEPLOYMENT.md](DEPLOYMENT.md)** | Deploy to production |
