@@ -21,7 +21,7 @@ function SellTicket({ user, onNavigate }) {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
 
-  const checkValidation = () => {
+  const checkValidation = React.useCallback(() => {
     const status = {
       transferable: formData.isTransferable,
       dateCheck: null,
@@ -43,7 +43,7 @@ function SellTicket({ user, onNavigate }) {
 
     setValidationStatus(status);
     return status;
-  };
+  }, [formData.isTransferable, formData.eventDate, formData.price, formData.faceValue]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ function SellTicket({ user, onNavigate }) {
     if (formData.eventDate || formData.price || formData.faceValue) {
       checkValidation();
     }
-  }, [formData.eventDate, formData.price, formData.faceValue, formData.isTransferable]);
+  }, [formData.eventDate, formData.price, formData.faceValue, formData.isTransferable, checkValidation]);
 
   const allChecksPass = validationStatus.transferable && 
                         validationStatus.dateCheck && 
