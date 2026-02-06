@@ -2,6 +2,22 @@
 
 A full-stack web application for safely buying and selling event tickets with user authentication, ticket validation, and secure Stripe payments.
 
+---
+
+## 📖 Documentation
+
+**New to TicketSwap?** Start here: **[GETTING_STARTED.md](GETTING_STARTED.md)**
+
+| Guide | Purpose |
+|-------|---------|
+| **[GETTING_STARTED.md](GETTING_STARTED.md)** | 👉 **Start here** - Overview of all guides |
+| **[QUICKSTART.md](QUICKSTART.md)** | Get running in 2 minutes |
+| **[HOW_TO_CHECK_OUT.md](HOW_TO_CHECK_OUT.md)** | Test the application |
+| **[DEPLOYMENT.md](DEPLOYMENT.md)** | Deploy to production |
+| **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** | Technical details |
+
+---
+
 ## 🚀 Quick Start
 
 **Want to get started quickly?** Check out our guides:
