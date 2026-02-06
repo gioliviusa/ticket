@@ -21,7 +21,7 @@ router.get('/profile', authenticateToken, apiLimiter, async (req, res) => {
 // @route   PUT /api/users/profile
 // @desc    Update user profile
 // @access  Private
-router.put('/profile', authenticateToken, async (req, res) => {
+router.put('/profile', authenticateToken, apiLimiter, async (req, res) => {
   try {
     const { firstName, lastName, phoneNumber } = req.body;
     

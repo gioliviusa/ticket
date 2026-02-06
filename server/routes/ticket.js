@@ -156,7 +156,7 @@ router.get('/', optionalAuth, apiLimiter, async (req, res) => {
 // @route   GET /api/tickets/:id
 // @desc    Get ticket details
 // @access  Public
-router.get('/:id', optionalAuth, async (req, res) => {
+router.get('/:id', optionalAuth, apiLimiter, async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id)
       .populate('seller', 'firstName lastName email verified');
@@ -181,7 +181,7 @@ router.get('/:id', optionalAuth, async (req, res) => {
 // @route   PUT /api/tickets/:id
 // @desc    Update ticket listing
 // @access  Private (owner only)
-router.put('/:id', authenticateToken, async (req, res) => {
+router.put('/:id', authenticateToken, apiLimiter, async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id);
 
@@ -225,7 +225,7 @@ router.put('/:id', authenticateToken, async (req, res) => {
 // @route   DELETE /api/tickets/:id
 // @desc    Delete/cancel ticket listing
 // @access  Private (owner only)
-router.delete('/:id', authenticateToken, async (req, res) => {
+router.delete('/:id', authenticateToken, apiLimiter, async (req, res) => {
   try {
     const ticket = await Ticket.findById(req.params.id);
 
@@ -256,7 +256,7 @@ router.delete('/:id', authenticateToken, async (req, res) => {
 // @route   POST /api/tickets/:id/validate
 // @desc    Validate ticket (admin/system endpoint)
 // @access  Private
-router.post('/:id/validate', authenticateToken, async (req, res) => {
+router.post('/:id/validate', authenticateToken, apiLimiter, async (req, res) => {
   try {
     const { validationStatus, validationNotes } = req.body;
 
