@@ -2,20 +2,55 @@
 
 Welcome to TicketSwap! This guide will help you understand how to deploy and check out the application.
 
+## 🚀 Choose Your Path
+
+### Path 1: GitHub Codespaces (Easiest!) ⭐
+
+**No installation needed!** Perfect if you want to start immediately.
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=gioliviusa/ticket)
+
+**👉 See [CODESPACES_GUIDE.md](CODESPACES_GUIDE.md)** - Complete 5-minute setup
+
+**Best if:**
+- You don't want to install anything
+- You're on a Chromebook, tablet, or shared computer
+- You want to start right away
+- You have a GitHub account
+
+---
+
+### Path 2: Local Setup
+
+Install on your computer for full control.
+
+**👉 See [STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** - Complete local setup
+
+**Best if:**
+- You want full control
+- You develop frequently
+- You have fast local hardware
+- You prefer offline development
+
+---
+
 ## 📚 Documentation Overview
 
 We've created comprehensive guides for different needs:
 
 | Guide | Purpose | Time Needed |
 |-------|---------|-------------|
-| **[STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** | 👉 **Complete beginners** - Every step explained | 10 minutes |
+| **[CODESPACES_GUIDE.md](CODESPACES_GUIDE.md)** | 👉 **GitHub Codespaces setup** - No installation! | 5 minutes |
+| **[STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** | **Complete beginners** - Local setup | 10 minutes |
 | **[QUICKSTART.md](QUICKSTART.md)** | Get running quickly | 2-5 minutes |
 | **[HOW_TO_CHECK_OUT.md](HOW_TO_CHECK_OUT.md)** | Test the application | 5-10 minutes |
 | **[DEPLOYMENT.md](DEPLOYMENT.md)** | Deploy to production | 15-30 minutes |
 | **[README.md](README.md)** | Full API documentation | Reference |
 | **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** | Technical details | Reference |
 
-**🆕 Never used command line before?** → [STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)
+**🆕 Never used command line before?** 
+- **Codespaces:** [CODESPACES_GUIDE.md](CODESPACES_GUIDE.md) ← No command line needed!
+- **Local:** [STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)
 
 **Have some experience?** → [QUICKSTART.md](QUICKSTART.md)
 

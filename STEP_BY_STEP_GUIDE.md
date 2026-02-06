@@ -4,7 +4,26 @@
 
 ---
 
-## 📋 Before You Start
+## 🚀 Choose Your Setup Method
+
+**🌟 EASIEST: Use GitHub Codespaces (Recommended for beginners!)**
+- ✅ Nothing to install on your computer
+- ✅ Works on any device with a browser
+- ✅ Takes 5 minutes
+- ✅ Free tier available
+
+👉 **[Go to CODESPACES_GUIDE.md](CODESPACES_GUIDE.md)** - Complete instructions!
+
+---
+
+**🖥️ Alternative: Local Setup (This guide below)**
+- Requires installing Node.js and MongoDB
+- Full control over your environment
+- Works offline
+
+---
+
+## 📋 Before You Start (Local Setup)
 
 ### Check if You Have These Installed
 

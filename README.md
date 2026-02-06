@@ -4,15 +4,50 @@ A full-stack web application for safely buying and selling event tickets with us
 
 ---
 
+## 🚀 Quick Start Options
+
+### Option 1: GitHub Codespaces (Easiest!) ⭐
+
+**No installation needed! Run TicketSwap in your browser.**
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=gioliviusa/ticket)
+
+1. Click the badge above
+2. Wait 2 minutes for setup
+3. See **[CODESPACES_GUIDE.md](CODESPACES_GUIDE.md)** for complete instructions
+
+**Perfect if you:**
+- 👍 Don't want to install anything
+- 👍 Want to start immediately
+- 👍 Are on a Chromebook or tablet
+- 👍 Have limited disk space
+
+### Option 2: Local Setup
+
+Install on your computer for full control:
+```bash
+git clone https://github.com/gioliviusa/ticket.git
+cd ticket
+npm run setup
+npm start
+```
+
+See guides below for detailed instructions.
+
+---
+
 ## 📖 Documentation
 
 **🆕 Complete Beginner?** Start here: **[STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** ⭐
+
+**🆕 Want the easiest option?** Start here: **[CODESPACES_GUIDE.md](CODESPACES_GUIDE.md)** ☁️
 
 This guide tells you **exactly** what to type, where to click, and what to copy/paste - perfect if you've never used the command line before!
 
 | Guide | Best For |
 |-------|---------|
-| **[STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** | 👉 **Absolute beginners** - Every detail explained |
+| **[CODESPACES_GUIDE.md](CODESPACES_GUIDE.md)** | 👉 **Easiest** - No installation needed! |
+| **[STEP_BY_STEP_GUIDE.md](STEP_BY_STEP_GUIDE.md)** | **Absolute beginners** - Local setup |
 | **[GETTING_STARTED.md](GETTING_STARTED.md)** | Overview of all guides |
 | **[QUICKSTART.md](QUICKSTART.md)** | Get running in 2 minutes |
 | **[HOW_TO_CHECK_OUT.md](HOW_TO_CHECK_OUT.md)** | Test the application |
@@ -21,7 +56,6 @@ This guide tells you **exactly** what to type, where to click, and what to copy/
 
 ---
 
-## 🚀 Quick Start
 
 **Want to get started quickly?** Check out our guides:
 
