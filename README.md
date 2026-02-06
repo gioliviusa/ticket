@@ -2,6 +2,42 @@
 
 A full-stack web application for safely buying and selling event tickets with user authentication, ticket validation, and secure Stripe payments.
 
+## 🚀 Quick Start
+
+**Want to get started quickly?** Check out our guides:
+
+- **[QUICKSTART.md](QUICKSTART.md)** - Get up and running in 5 minutes
+- **[DEPLOYMENT.md](DEPLOYMENT.md)** - Deploy to production (Heroku, AWS, DigitalOcean, etc.)
+- **[IMPLEMENTATION_SUMMARY.md](IMPLEMENTATION_SUMMARY.md)** - Technical implementation details
+
+### Super Quick Setup
+
+```bash
+# 1. Clone and install
+git clone https://github.com/gioliviusa/ticket.git
+cd ticket
+npm install
+
+# 2. Run setup script (creates .env with defaults)
+npm run setup
+
+# 3. Start the server
+npm start
+
+# 4. Open client/index.html in your browser
+```
+
+### With Sample Data
+
+```bash
+# After setup, seed the database with sample data
+npm run seed
+
+# Login with: alice@example.com / password123
+```
+
+---
+
 ## Features
 
 ### ✨ Core Functionality
@@ -113,6 +149,30 @@ A full-stack web application for safely buying and selling event tickets with us
 6. **Access the application**
    - API: http://localhost:5000
    - Frontend: Open `client/index.html` in your browser or serve with a static server
+
+## Available Scripts
+
+```bash
+npm start          # Start the production server
+npm run dev        # Start development server with auto-reload
+npm run setup      # Run automated setup (creates .env, installs deps)
+npm run seed       # Seed database with sample data
+npm run test:api   # Test API endpoints
+```
+
+## Testing with Sample Data
+
+After setup, you can seed the database with sample users and tickets:
+
+```bash
+npm run seed
+```
+
+This creates:
+- 3 sample users (alice@example.com, bob@example.com, charlie@example.com)
+- 5 sample ticket listings
+- 1 sample transaction
+- Password for all users: `password123`
 
 ## API Documentation
 

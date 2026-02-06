@@ -6,6 +6,9 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
+    "setup": "bash scripts/setup.sh",
+    "seed": "node scripts/seed.js",
+    "test:api": "bash scripts/test.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
