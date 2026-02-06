@@ -1,12 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { body } = require('express-validator');
 const { authenticateToken } = require('../middleware/auth');
 const validate = require('../middleware/validate');
-const { paymentLimiter } = require('../middleware/rateLimiter');
+const { paymentLimiter, apiLimiter } = require('../middleware/rateLimiter');
 const Ticket = require('../models/Ticket');
 const Transaction = require('../models/Transaction');
+
+// Initialize Stripe only if secret key is provided
+let stripe = null;
+if (process.env.STRIPE_SECRET_KEY) {
+  stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+}
 
 // Service fee percentage (e.g., 10% = 0.10)
 const SERVICE_FEE_RATE = parseFloat(process.env.SERVICE_FEE_RATE || '0.10');
@@ -18,6 +23,13 @@ router.post('/create-payment-intent', authenticateToken, paymentLimiter, [
   body('ticketId').notEmpty()
 ], validate, async (req, res) => {
   try {
+    // Check if Stripe is configured
+    if (!stripe) {
+      return res.status(503).json({ 
+        error: 'Payment processing is not configured. Please contact support.' 
+      });
+    }
+    
     const { ticketId } = req.body;
 
     // Get ticket
@@ -80,6 +92,13 @@ router.post('/confirm-payment', authenticateToken, paymentLimiter, [
   body('ticketId').notEmpty()
 ], validate, async (req, res) => {
   try {
+    // Check if Stripe is configured
+    if (!stripe) {
+      return res.status(503).json({ 
+        error: 'Payment processing is not configured. Please contact support.' 
+      });
+    }
+    
     const { paymentIntentId, ticketId } = req.body;
 
     // Verify payment intent
@@ -155,6 +174,11 @@ router.post('/confirm-payment', authenticateToken, paymentLimiter, [
 // @desc    Stripe webhook endpoint
 // @access  Public (Stripe only)
 router.post('/webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+  // Check if Stripe is configured
+  if (!stripe) {
+    return res.status(503).json({ error: 'Payment processing not configured' });
+  }
+  
   const sig = req.headers['stripe-signature'];
 
   let event;
