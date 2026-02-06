@@ -90,10 +90,7 @@ async function seedDatabase() {
     // Connect to MongoDB
     console.log('📡 Connecting to MongoDB...');
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/ticketswap';
-    await mongoose.connect(mongoURI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    });
+    await mongoose.connect(mongoURI);
     console.log('✅ Connected to MongoDB\n');
 
     // Clear existing data
