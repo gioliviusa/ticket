@@ -4,6 +4,7 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { body } = require('express-validator');
 const { authenticateToken } = require('../middleware/auth');
 const validate = require('../middleware/validate');
+const { paymentLimiter } = require('../middleware/rateLimiter');
 const Ticket = require('../models/Ticket');
 const Transaction = require('../models/Transaction');
 
@@ -13,7 +14,7 @@ const SERVICE_FEE_RATE = parseFloat(process.env.SERVICE_FEE_RATE || '0.10');
 // @route   POST /api/payments/create-payment-intent
 // @desc    Create a payment intent for ticket purchase
 // @access  Private
-router.post('/create-payment-intent', authenticateToken, [
+router.post('/create-payment-intent', authenticateToken, paymentLimiter, [
   body('ticketId').notEmpty()
 ], validate, async (req, res) => {
   try {
@@ -74,7 +75,7 @@ router.post('/create-payment-intent', authenticateToken, [
 // @route   POST /api/payments/confirm-payment
 // @desc    Confirm payment and create transaction
 // @access  Private
-router.post('/confirm-payment', authenticateToken, [
+router.post('/confirm-payment', authenticateToken, paymentLimiter, [
   body('paymentIntentId').notEmpty(),
   body('ticketId').notEmpty()
 ], validate, async (req, res) => {
@@ -200,7 +201,7 @@ router.post('/webhook', express.raw({ type: 'application/json' }), async (req, r
 // @route   GET /api/payments/transactions
 // @desc    Get user's transactions
 // @access  Private
-router.get('/transactions', authenticateToken, async (req, res) => {
+router.get('/transactions', authenticateToken, apiLimiter, async (req, res) => {
   try {
     const { type = 'all' } = req.query;
 

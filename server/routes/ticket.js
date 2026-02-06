@@ -3,12 +3,13 @@ const router = express.Router();
 const { body } = require('express-validator');
 const { authenticateToken, optionalAuth } = require('../middleware/auth');
 const validate = require('../middleware/validate');
+const { apiLimiter, createLimiter } = require('../middleware/rateLimiter');
 const Ticket = require('../models/Ticket');
 
 // @route   POST /api/tickets
 // @desc    Create a new ticket listing
 // @access  Private
-router.post('/', authenticateToken, [
+router.post('/', authenticateToken, createLimiter, [
   body('eventName').trim().notEmpty(),
   body('eventDate').isISO8601(),
   body('eventLocation').trim().notEmpty(),
@@ -86,7 +87,7 @@ router.post('/', authenticateToken, [
 // @route   GET /api/tickets
 // @desc    Get all available tickets (with search/filter)
 // @access  Public
-router.get('/', optionalAuth, async (req, res) => {
+router.get('/', optionalAuth, apiLimiter, async (req, res) => {
   try {
     const {
       search,

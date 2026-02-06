@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { authenticateToken } = require('../middleware/auth');
+const { apiLimiter } = require('../middleware/rateLimiter');
 const User = require('../models/User');
 const Ticket = require('../models/Ticket');
 const Transaction = require('../models/Transaction');
@@ -8,7 +9,7 @@ const Transaction = require('../models/Transaction');
 // @route   GET /api/users/profile
 // @desc    Get current user profile
 // @access  Private
-router.get('/profile', authenticateToken, async (req, res) => {
+router.get('/profile', authenticateToken, apiLimiter, async (req, res) => {
   try {
     res.json({ user: req.user });
   } catch (error) {
@@ -45,7 +46,7 @@ router.put('/profile', authenticateToken, async (req, res) => {
 // @route   GET /api/users/dashboard
 // @desc    Get user dashboard data (listings, sales, purchases)
 // @access  Private
-router.get('/dashboard', authenticateToken, async (req, res) => {
+router.get('/dashboard', authenticateToken, apiLimiter, async (req, res) => {
   try {
     const userId = req.user._id;
 
@@ -108,7 +109,7 @@ router.get('/dashboard', authenticateToken, async (req, res) => {
 // @route   GET /api/users/:id/listings
 // @desc    Get user's public listings
 // @access  Public
-router.get('/:id/listings', async (req, res) => {
+router.get('/:id/listings', apiLimiter, async (req, res) => {
   try {
     const listings = await Ticket.find({ 
       seller: req.params.id,

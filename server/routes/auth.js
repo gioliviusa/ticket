@@ -5,6 +5,7 @@ const { body } = require('express-validator');
 const passport = require('passport');
 const User = require('../models/User');
 const validate = require('../middleware/validate');
+const { authLimiter } = require('../middleware/rateLimiter');
 
 // Generate JWT token
 const generateToken = (userId) => {
@@ -18,7 +19,7 @@ const generateToken = (userId) => {
 // @route   POST /api/auth/register
 // @desc    Register a new user
 // @access  Public
-router.post('/register', [
+router.post('/register', authLimiter, [
   body('email').isEmail().normalizeEmail(),
   body('password').isLength({ min: 6 }),
   body('firstName').trim().notEmpty(),
@@ -64,7 +65,7 @@ router.post('/register', [
 // @route   POST /api/auth/login
 // @desc    Login user
 // @access  Public
-router.post('/login', [
+router.post('/login', authLimiter, [
   body('email').isEmail().normalizeEmail(),
   body('password').notEmpty()
 ], validate, async (req, res) => {
