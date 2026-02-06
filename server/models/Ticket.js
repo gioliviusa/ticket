@@ -102,4 +102,8 @@ const ticketSchema = new mongoose.Schema({
 ticketSchema.index({ eventName: 'text', eventLocation: 'text', eventVenue: 'text' });
 ticketSchema.index({ eventDate: 1, status: 1 });
 
+// Note: Text indexes need to be created in MongoDB before text search queries work.
+// Run this in MongoDB shell or use Mongoose connection:
+// db.tickets.createIndex({ eventName: "text", eventLocation: "text", eventVenue: "text" })
+
 module.exports = mongoose.model('Ticket', ticketSchema);

@@ -268,11 +268,31 @@
         let cardElement;
         let paymentIntentId;
         let ticketData;
+        let stripePublishableKey;
         
-        // Initialize Stripe (Note: Use your publishable key in production)
+        // Fetch Stripe publishable key from server
+        async function fetchStripeKey() {
+            try {
+                const response = await fetch(`${API_URL}/config/stripe`);
+                const data = await response.json();
+                stripePublishableKey = data.publishableKey;
+            } catch (error) {
+                console.error('Error fetching Stripe key:', error);
+            }
+        }
+        
+        // Initialize Stripe
         async function initializeStripe() {
-            // In production, get this from environment variable
-            stripe = Stripe('pk_test_your_publishable_key'); // Replace with actual key
+            if (!stripePublishableKey) {
+                await fetchStripeKey();
+            }
+            
+            if (!stripePublishableKey) {
+                console.warn('Stripe publishable key not configured');
+                return;
+            }
+            
+            stripe = Stripe(stripePublishableKey);
             elements = stripe.elements();
             
             cardElement = elements.create('card', {
@@ -455,7 +475,9 @@
         });
         
         // Initialize
-        // initializeStripe(); // Uncomment when Stripe keys are configured
+        fetchStripeKey().then(() => {
+            // initializeStripe(); // Uncomment when Stripe keys are configured
+        });
         loadTicket();
     </script>
 </body>

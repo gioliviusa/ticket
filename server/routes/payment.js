@@ -8,7 +8,7 @@ const Ticket = require('../models/Ticket');
 const Transaction = require('../models/Transaction');
 
 // Service fee percentage (e.g., 10% = 0.10)
-const SERVICE_FEE_RATE = 0.10;
+const SERVICE_FEE_RATE = parseFloat(process.env.SERVICE_FEE_RATE || '0.10');
 
 // @route   POST /api/payments/create-payment-intent
 // @desc    Create a payment intent for ticket purchase
@@ -85,7 +85,16 @@ router.post('/confirm-payment', authenticateToken, [
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
 
     if (paymentIntent.status !== 'succeeded') {
-      return res.status(400).json({ error: 'Payment not completed' });
+      const statusMessages = {
+        'processing': 'Payment is still processing',
+        'requires_payment_method': 'Payment method required',
+        'requires_confirmation': 'Payment requires confirmation',
+        'requires_action': 'Payment requires additional action',
+        'canceled': 'Payment was canceled',
+        'failed': 'Payment failed'
+      };
+      const message = statusMessages[paymentIntent.status] || 'Payment not completed';
+      return res.status(400).json({ error: message });
     }
 
     // Get ticket

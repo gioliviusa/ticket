@@ -12,6 +12,7 @@ const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/user');
 const ticketRoutes = require('./routes/ticket');
 const paymentRoutes = require('./routes/payment');
+const configRoutes = require('./routes/config');
 
 // Import passport configuration
 require('./config/passport')(passport);
@@ -40,6 +41,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/tickets', ticketRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/config', configRoutes);
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
