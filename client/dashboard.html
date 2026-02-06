@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TicketSwap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+        }
+        
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+        }
+        
+        nav a, nav button {
+            color: white;
+            text-decoration: none;
+            margin-left: 20px;
+            padding: 8px 16px;
+            border-radius: 4px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .welcome {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+        
+        .section {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .section h2 {
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .ticket-list, .transaction-list {
+            list-style: none;
+        }
+        
+        .ticket-item, .transaction-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .ticket-item:last-child, .transaction-item:last-child {
+            border-bottom: none;
+        }
+        
+        .ticket-item h4, .transaction-item h4 {
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .ticket-meta, .transaction-meta {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .status-available {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-sold {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 12px 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>🎫 TicketSwap</h1>
+            <nav>
+                <a href="index.html">Home</a>
+                <a href="tickets.html">Browse Tickets</a>
+                <a href="dashboard.html">Dashboard</a>
+                <button id="logoutBtn">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="welcome">
+            <h2>Welcome, <span id="userName"></span>!</h2>
+            <p>Manage your ticket listings, track your sales, and view your purchases.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>Active Listings</h3>
+                <div class="value" id="activeListings">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Sales</h3>
+                <div class="value" id="totalSales">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Total Purchases</h3>
+                <div class="value" id="totalPurchases">0</div>
+            </div>
+            <div class="stat-card">
+                <h3>Revenue</h3>
+                <div class="value" id="revenue">$0</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="tabs">
+                <button class="tab active" data-tab="listings">My Listings</button>
+                <button class="tab" data-tab="sales">Sales</button>
+                <button class="tab" data-tab="purchases">Purchases</button>
+            </div>
+
+            <div id="listings" class="tab-content active">
+                <a href="create-listing.html" class="btn">+ Create New Listing</a>
+                <ul id="listingsList" class="ticket-list"></ul>
+            </div>
+
+            <div id="sales" class="tab-content">
+                <ul id="salesList" class="transaction-list"></ul>
+            </div>
+
+            <div id="purchases" class="tab-content">
+                <ul id="purchasesList" class="transaction-list"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'http://localhost:5000/api';
+        const token = localStorage.getItem('token');
+        
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+        
+        // Tab functionality
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+        
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('token');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        });
+        
+        // Load user data
+        const user = JSON.parse(localStorage.getItem('user'));
+        document.getElementById('userName').textContent = `${user.firstName} ${user.lastName}`;
+        
+        // Fetch dashboard data
+        async function loadDashboard() {
+            try {
+                const response = await fetch(`${API_URL}/users/dashboard`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to load dashboard');
+                }
+                
+                const data = await response.json();
+                
+                // Update stats
+                document.getElementById('activeListings').textContent = data.stats.activeListings;
+                document.getElementById('totalSales').textContent = data.stats.totalSales;
+                document.getElementById('totalPurchases').textContent = data.stats.totalPurchases;
+                document.getElementById('revenue').textContent = `$${data.stats.revenue.toFixed(2)}`;
+                
+                // Display listings
+                const listingsList = document.getElementById('listingsList');
+                if (data.listings.length === 0) {
+                    listingsList.innerHTML = '<div class="empty-state">No listings yet. Create your first listing!</div>';
+                } else {
+                    listingsList.innerHTML = data.listings.map(ticket => `
+                        <li class="ticket-item">
+                            <h4>${ticket.eventName}</h4>
+                            <div class="ticket-meta">
+                                <span class="status status-${ticket.status}">${ticket.status}</span>
+                                <span> • ${new Date(ticket.eventDate).toLocaleDateString()}</span>
+                                <span> • $${ticket.resalePrice}</span>
+                            </div>
+                        </li>
+                    `).join('');
+                }
+                
+                // Display sales
+                const salesList = document.getElementById('salesList');
+                if (data.sales.length === 0) {
+                    salesList.innerHTML = '<div class="empty-state">No sales yet.</div>';
+                } else {
+                    salesList.innerHTML = data.sales.map(transaction => `
+                        <li class="transaction-item">
+                            <h4>${transaction.ticket.eventName}</h4>
+                            <div class="transaction-meta">
+                                <span class="status status-${transaction.status}">${transaction.status}</span>
+                                <span> • Sold for $${transaction.amount}</span>
+                                <span> • ${new Date(transaction.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        </li>
+                    `).join('');
+                }
+                
+                // Display purchases
+                const purchasesList = document.getElementById('purchasesList');
+                if (data.purchases.length === 0) {
+                    purchasesList.innerHTML = '<div class="empty-state">No purchases yet.</div>';
+                } else {
+                    purchasesList.innerHTML = data.purchases.map(transaction => `
+                        <li class="transaction-item">
+                            <h4>${transaction.ticket.eventName}</h4>
+                            <div class="transaction-meta">
+                                <span class="status status-${transaction.status}">${transaction.status}</span>
+                                <span> • Paid $${transaction.totalAmount}</span>
+                                <span> • ${new Date(transaction.createdAt).toLocaleDateString()}</span>
+                            </div>
+                        </li>
+                    `).join('');
+                }
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                alert('Failed to load dashboard data');
+            }
+        }
+        
+        loadDashboard();
+    </script>
+</body>
+</html>
